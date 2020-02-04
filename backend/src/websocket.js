@@ -1,10 +1,12 @@
 const socketio = require('socket.io');
 const parseStringAsArray = require('./utils/parseStringAsArray');
+const calculateDiscance = require('./utils/calculateDistance');
 
+let io;
 const connections = [];
 
 exports.setuWebSocket = (server) => {
-    const io = socketio(server);
+    io = socketio(server);
 
     io.on('connection', socket => {
         console.log(socket.id);
@@ -25,7 +27,15 @@ exports.setuWebSocket = (server) => {
 };
 
 exports.findConnextions = (coordinates, techs) => {
-    return connections.filter(connections => {
-        return 
+    return connections.filter(connection => {
+        return calculateDiscance(coordinates, connection.coordinates) < 10
+        && connection.techs.some(item => techs.includes(item))
     })
+}
+
+exports.sendMessage = (to, message, data) => {
+    to.forEach(connection => {
+        io.to(connection.id).emit(message, data);
+       
+    });
 }
