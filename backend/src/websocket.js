@@ -5,7 +5,7 @@ const calculateDiscance = require('./utils/calculateDistance');
 let io;
 const connections = [];
 
-exports.setuWebSocket = (server) => {
+exports.setupWebSocket = (server) => {
     io = socketio(server);
 
     io.on('connection', socket => {
