@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "axios": "^0.19.1",
+    "axios": "^1.13.5",
     "mobile": "^0.0.1",
     "mongoose": "^5.8.7",
     "react-navigation": "^4.0.10"
